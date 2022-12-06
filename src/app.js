@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const FileUpload = require("express-fileupload");
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
@@ -12,6 +13,8 @@ require('dotenv').config();
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(FileUpload());
+app.use(express.static("public"));
 
 const employees = require('./routes/employees');
 
