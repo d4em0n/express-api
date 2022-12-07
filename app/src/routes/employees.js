@@ -11,8 +11,22 @@ const router = express.Router();
 
 /* Get all employees */
 router.get("/", async (req, res, next) => {
+
   try {
-    const allEmployees = await employees.find({});
+    const {text} = req.query;
+    let allEmployees;
+    if(text) {
+      var query = {
+        name: {
+          $regex: text,
+          $options: 'i' //i: ignore case, m: multiline, etc
+        }
+      };
+      allEmployees = await employees.find(query, {});
+    } else {
+      allEmployees = await employees.find({});
+
+    }
     res.json(allEmployees);
   } catch (error) {
     next(error);
