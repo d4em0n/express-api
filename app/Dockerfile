@@ -6,7 +6,6 @@ WORKDIR /usr/src/app
 EXPOSE 3000
 
 COPY . /usr/src/app
-COPY .env .env
 COPY package.json package.json
 
 RUN npm install
